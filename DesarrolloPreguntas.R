@@ -139,15 +139,37 @@ for(i in 1:length(cartas)){
 
 #pregunta 6
 
-noticia1 <- c("La Prueba de Selección Universitaria (PSU) se rendirá este lunes y martes, por primera vez en enero, a consecuencia del estallido social que se inició el 18 de octubre, hace ya casi tres meses.
-
-Justamente en relación con el estallido social, el Presidente Sebastián Piñera afirmó recientemente que lo peor ya había pasado. Tales declaraciones desataron una ola de críticas en distintos sectores de la ciudadanía y el hecho de que la PSU pueda aplicarse o no, a lo largo de todo el país, puede ser observado como una pulseada entre los que piensan que el conflicto transita hacia el establecimiento de la normalidad y aquellos que reclaman que nada se ha resuelto. Las organizaciones que congregan a los estudiantes de enseñanza media, ACES y CONES, representan la segunda posición y sus integrantes defienden que la PSU 2019 no se rinda, hecho inédito desde que se implementó el actual sistema.
-
-Analizando lo ocurrido en los últimos años, estas mismas organizaciones estudiantiles han sido las más críticas respecto de la PSU. Han manifestado reparos, cuestionamientos y propuestas; pero sus demandas, como muchas otras que se han mostrado en el estallido social, no han sido escuchadas. Asimismo, si se considera que la PSU es una prueba declarada como transitoria, camino a la implementación del nuevo Sistema de Ingreso a la Educación Superior (SIES), entonces lo sucedido con los requerimientos de ACES y CONES resultan delicados, por cuanto en ese tránsito, los principales beneficiados o afectados por el sistema de admisión universitaria debieron ser considerados en una nueva modalidad que, según la Ley de Educación Superior, servirá para el proceso de admisión 2021 y posteriores.
-
-El Consejo de Rectores de las Universidades Chilenas (CRUCH), a través de su Vicepresidente, Aldo Valle, expresó ayer su preocupación: "Respetamos las organizaciones de estudiantes que tienen juicios críticos, pero nuestra responsabilidad es atender a las 297 mil personas inscritas". Junto con indicar que se han definido todas las medidas de contingencia a fin de brindar garantías a todas y todos los que rindan esta prueba, el representante del Consejo de Rectores muestra dos señales que deberían considerarse: por una parte, que las demandas de los estudiantes secundarios deben ser escuchadas y, por otra, que el establecer garantías para quienes rendirán la PSU "no contempla, en modo alguno, una sobrerreacción de parte nuestra en materia de seguridad, por ejemplo, con la fuerza pública".
-
-El Consejo de Rectores de Chile (CRUCH) muestra caminos para tener en cuenta cuando se presentan conflictos sociales, de modo que, si se ha de pensar desde principios democráticos, parece razonable tratar de no perjudicar a los cerca de 300 mil jóvenes que deberán rendir la PSU mañana y pasado.")
-
+noticia1 <- c("La Prueba de Selección Universitaria (PSU) se rendirá este lunes y martes, por primera vez en enero, a consecuencia del estallido social que se inició el 18 de octubre, hace ya casi tres meses. Justamente en relación con el estallido social, el Presidente Sebastián Piñera afirmó recientemente que lo peor ya había pasado. Tales declaraciones desataron una ola de críticas en distintos sectores de la ciudadanía y el hecho de que la PSU pueda aplicarse o no, a lo largo de todo el país, puede ser observado como una pulseada entre los que piensan que el conflicto transita hacia el establecimiento de la normalidad y aquellos que reclaman que nada se ha resuelto. Las organizaciones que congregan a los estudiantes de enseñanza media, ACES y CONES, representan la segunda posición y sus integrantes defienden que la PSU 2019 no se rinda, hecho inédito desde que se implementó el actual sistema. Analizando lo ocurrido en los últimos años, estas mismas organizaciones estudiantiles han sido las más críticas respecto de la PSU. Han manifestado reparos, cuestionamientos y propuestas; pero sus demandas, como muchas otras que se han mostrado en el estallido social, no han sido escuchadas. Asimismo, si se considera que la PSU es una prueba declarada como transitoria, camino a la implementación del nuevo Sistema de Ingreso a la Educación Superior (SIES), entonces lo sucedido con los requerimientos de ACES y CONES resultan delicados, por cuanto en ese tránsito, los principales beneficiados o afectados por el sistema de admisión universitaria debieron ser considerados en una nueva modalidad que, según la Ley de Educación Superior, servirá para el proceso de admisión 2021 y posteriores. El Consejo de Rectores de las Universidades Chilenas (CRUCH), a través de su Vicepresidente, Aldo Valle, expresó ayer su preocupación: Respetamos las organizaciones de estudiantes que tienen juicios críticos, pero nuestra responsabilidad es atender a las 297 mil personas inscritas. Junto con indicar que se han definido todas las medidas de contingencia a fin de brindar garantías a todas y todos los que rindan esta prueba, el representante del Consejo de Rectores muestra dos señales que deberían considerarse: por una parte, que las demandas de los estudiantes secundarios deben ser escuchadas y, por otra, que el establecer garantías para quienes rendirán la PSU no contempla, en modo alguno, una sobrerreacción de parte nuestra en materia de seguridad, por ejemplo, con la fuerza pública. El Consejo de Rectores de Chile (CRUCH) muestra caminos para tener en cuenta cuando se presentan conflictos sociales, de modo que, si se ha de pensar desde principios democráticos, parece razonable tratar de no perjudicar a los cerca de 300 mil jóvenes que deberán rendir la PSU mañana y pasado.")
 #asi lo toma como 1 solo chr.
+
+library(tidyverse)
+library(tokenizers)
+#procedemos a segmentar las palabras
+
+palabras_n1 <- tokenize_words(noticia1)
+palabras_n1
+#se analiza cuantas palabras hay
+length(palabras_n1[[1]])
+#se genera la tabla
+tabla_n1 <- table(palabras_n1[[1]])
+tabla_n1 <- data_frame(palabras = names(tabla_n1), recuento = as.numeric(tabla_n1))
+tabla_n1
+#se ordena la tabla
+arrange(tabla_n1, desc(recuento))
+n1 <- arrange(tabla_n1, desc(recuento))
+noticia2 <- c("Después de que fuera postergado por las manifestaciones del estallido social, finalmente ya hay fecha para el concierto que ofrecerá The Offspring en Chile. La bandaestadounidense cumplirá la promesa de reencontrarse con el público chileno y llegará el próximo sábado 14 de marzo al Velódromo del Estadio Nacional. El show también contará con la presencia de múltiples bandas invitadas, las que se anunciarán dentro de los próximos días. Eso sí, ya no se contará con la presencia de Bad Religion, como se había presupuestado para el show inicial de octubre. Las entradas para ver a The Offspring están disponibles en Ticketek, desde los 45.000 pesos, más cargo por servicio. Los tickets adquiridos con anterioridad seguirán siendo válidos para la nueva fecha. Mientras que quienes no puedan asistir, deberán ponerse en contacto directamente con Ticketek, para el proceso de devolución.")
+
+palabras_n2 <- tokenize_words(noticia2)
+palabras_n2
+#se analiza cuantas palabras hay
+length(palabras_n2[[1]])
+#se genera la tabla
+tabla_n2 <- table(palabras_n2[[1]])
+tabla_n2 <- data_frame(palabras = names(tabla_n2), recuento = as.numeric(tabla_n2))
+tabla_n2
+#se ordena la tabla
+arrange(tabla_n2, desc(recuento))
+n2 <- arrange(tabla_n2, desc(recuento))
+tabla_final <- full_join(n1,n2, by = "palabras")
+tabla_final
 
